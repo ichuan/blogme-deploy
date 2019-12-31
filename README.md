@@ -30,6 +30,10 @@ For example, adding `api1`
     ```
 
 - Create a `api.template` copy in `data/nginx`, modify it. Change `volumes` section in ui
+- Get SSL
+  - `./certbot.sh issue xx.yy`
+  - Modify `data/nginx/api1.conf`, `ssl_certificate` section
+  - Add this to crontab `0 1 * * * /path/to/certbot.sh renew`
 
 
 ## Importing wordpress
