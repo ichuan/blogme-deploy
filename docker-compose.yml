@@ -43,7 +43,7 @@ services:
       DB_NAME: 'api1'
       # generated using: openssl rand -hex 32
       SECRET_KEY: '5705cd149afab05e90716f6651db8b0c63975dafab435df84f78adddcedb5a05'
-      CORS_ORIGINS: 'http://localhost:3000'
+      CORS_ORIGINS: 'https://yanxinyi.me'
     expose:
       - '8000'
     volumes:

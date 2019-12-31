@@ -1,10 +1,5 @@
 # blogme-deploy
 
-## GitHub login
-- Generate a token from <https://github.com/settings/tokens> with only one scope `read:packages`.
-- Run `docker login -u $USERNAME -p $TOKEN docker.pkg.github.com`
-
-
 ## Downloading UI
 
 Check `data/README.md`
@@ -25,6 +20,10 @@ For example, adding `api1`
     # Create a db: api1
     docker-compose exec db mysql -uroot -e "CREATE DATABASE api1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
+    # Restart all
+    docker-compose down
+    docker-compose up
+
     # Create tables
     docker-compose exec api1 python -m blogme.bin.cmd create tables
     ```
@@ -41,4 +40,11 @@ For example, adding `api1`
 ```
 cp WordPress.2019-12-31.xml data/api1/public/
 docker-compose exec api1 python -m blogme.bin.cmd import wordpress /app/blogme/public/WordPress.2019-12-31.xml
+```
+
+Batch compress image:
+```
+docker-compose exec api1 bash
+cd /app/blogme
+for img in public/upload/*; do echo $img; convert "$img" -auto-orient -strip -quality 80 -resize "1600>" "$img"; done
 ```
