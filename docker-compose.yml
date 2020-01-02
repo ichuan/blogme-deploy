@@ -9,6 +9,14 @@ x-server-tune:
     nproc: 65535
     nofile: 500000
 
+x-api-server:
+  &api-server
+  image: ichuan/blogme-api
+  expose:
+    - '8000'
+  depends_on:
+    - db
+
 services:
   db:
     << : *server-tune
@@ -36,18 +44,13 @@ services:
       - api1
   api1:
     << : *server-tune
-    # image: docker.pkg.github.com/ichuan/blogme-api/xinyi
-    image: ichuan/blogme-api
+    << : *api-server
     environment:
       DB_HOST: 'db'
       DB_NAME: 'api1'
       # generated using: openssl rand -hex 32
       SECRET_KEY: '5705cd149afab05e90716f6651db8b0c63975dafab435df84f78adddcedb5a05'
       CORS_ORIGINS: 'https://yanxinyi.me'
-    expose:
-      - '8000'
     volumes:
       - "./data/api1/public:/app/blogme/public"
       - "./data/api1/logs:/app/logs"
-    depends_on:
-      - db

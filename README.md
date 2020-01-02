@@ -46,7 +46,7 @@ Batch compress image:
 ```
 docker-compose exec api1 bash
 cd /app/blogme
-for img in public/upload/*; do echo $img; convert "$img" -auto-orient -strip -quality 80 -resize "1600>" "$img"; done
+for img in public/upload/*; do echo $img; convert "$img" -auto-orient -strip -interlace Plane -quality 80 -resize "1600>" "$img"; done
 ```
 
 
