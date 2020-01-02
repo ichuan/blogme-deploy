@@ -48,3 +48,12 @@ docker-compose exec api1 bash
 cd /app/blogme
 for img in public/upload/*; do echo $img; convert "$img" -auto-orient -strip -quality 80 -resize "1600>" "$img"; done
 ```
+
+
+## Backuping
+```
+echo "Dumping mysql..."
+ssh xinyi docker-compose exec db "mysqldump -uroot" > blogme/db.sql
+echo "Downloading config and uploads..."
+rsync -avhPH --delete --exclude=/data/mysql blogme:/home/admin/blogme/ blogme.me/
+```
