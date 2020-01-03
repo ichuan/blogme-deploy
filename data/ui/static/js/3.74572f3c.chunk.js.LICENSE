@@ -4,6 +4,12 @@ object-assign
 @license MIT
 */
 
+/*!
+ * bulma-toast 1.5.4 
+ * (c) 2018-present @rfoel <rafaelfr@outlook.com> 
+ * Released under the MIT License.
+ */
+
 /** @license React v16.12.0
  * react.production.min.js
  *
