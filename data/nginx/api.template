@@ -26,9 +26,10 @@ server {
 
     root /www;
 
-    location / {
-      try_files $uri /index.html;
-    }
+    # pushState support
+    # location / {
+    #   try_files $uri /index.html;
+    # }
 
     location /api {
       proxy_pass http://api1:8000;
