@@ -49,6 +49,18 @@ cd /app/blogme
 for img in public/upload/*; do echo $img; convert "$img" -auto-orient -strip -interlace Plane -quality 80 -resize "1600>" "$img"; done
 ```
 
+## Importing djblog
+
+```
+# On djblog server
+./manage.py dumpdata --indent=2 --natural > djblog.json
+# On blogme
+cp djblog.json data/ichuan/public/
+docker-compose exec ichuan python -m blogme.bin.cmd import djblog /app/blogme/public/djblog.json --urlprefix=http://ichuan.net
+```
+
+For batch compress image, see above
+
 
 ## Backuping
 ```
