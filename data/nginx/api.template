@@ -31,7 +31,7 @@ server {
     #   try_files $uri /index.html;
     # }
 
-    location = /feed {
+    location = /feed/ {
       proxy_pass http://api1:8000/api/articles/feed;
       proxy_set_header Host $host;
       proxy_set_header X-Real-IP $remote_addr;
