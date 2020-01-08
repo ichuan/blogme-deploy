@@ -39,10 +39,10 @@ services:
       - "./data/nginx:/etc/nginx/conf.d"
       - "./data/letsencrypt:/etc/letsencrypt"
       - "./data/ui:/www"
-      - "./data/api1/public:/public/api1"
+      - "./data/public:/public"
     depends_on:
-      - api1
-  api1:
+      - api1.com
+  api1.com:
     << : *server-tune
     << : *api-server
     environment:
@@ -52,5 +52,5 @@ services:
       SECRET_KEY: '5705cd149afab05e90716f6651db8b0c63975dafab435df84f78adddcedb5a05'
       CORS_ORIGINS: 'https://yanxinyi.me'
     volumes:
-      - "./data/api1/public:/app/blogme/public"
-      - "./data/api1/logs:/app/logs"
+      - "./data/public/api1.com:/app/blogme/public"
+      - "./data/logs/api1.com:/app/logs"

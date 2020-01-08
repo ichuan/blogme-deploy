@@ -16,16 +16,16 @@ server {
     include /etc/nginx/conf.d/shared/static.conf;
 
     location = /feed/ {
-      proxy_pass http://api1:8000/api/articles/feed;
+      proxy_pass http://DOMAIN:8000/api/articles/feed;
       include /etc/nginx/conf.d/shared/proxy.conf;
     }
 
     location /api {
-      proxy_pass http://api1:8000;
+      proxy_pass http://DOMAIN:8000;
       include /etc/nginx/conf.d/shared/proxy.conf;
     }
 
     location /public {
-      alias /public/api1;
+      alias /public/DOMAIN;
     }
 }
