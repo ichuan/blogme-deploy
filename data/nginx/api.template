@@ -27,5 +27,6 @@ server {
 
     location /public {
       alias /public/DOMAIN;
+      include /etc/nginx/conf.d/shared/cache.conf;
     }
 }
