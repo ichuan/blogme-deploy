@@ -14,8 +14,12 @@ issue() {
 renew() {
   docker run -it --rm --name certbot -v ${SCRIPT_DIR}/data/ui:/www \
     -v ${SCRIPT_DIR}/data/letsencrypt:/etc/letsencrypt certbot/certbot renew \
-    --agree-tos --webroot --webroot-path /www -n \
-    --deploy-hook ${SCRIPT_DIR}/certbot.sh reload-nginx
+    --agree-tos --webroot --webroot-path /www -n
+  reload_nginx
+}
+
+reload_nginx() {
+    docker-compose exec ui nginx -s reload
 }
 
 
@@ -24,10 +28,10 @@ case "$1" in
     issue $2
     ;;
   renew)
-    echo renew
+    renew
     ;;
   reload-nginx)
-    docker-compose exec ui nginx -s reload
+    reload_nginx
     ;;
   *)
     echo "Usage: $0 <issue|renew|reload-nginx>"
